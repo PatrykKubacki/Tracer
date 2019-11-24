@@ -12,6 +12,8 @@ using Tracer.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Tracer.Models;
+using Tracer.Repository;
 
 namespace Tracer
 {
@@ -34,7 +36,11 @@ namespace Tracer
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddScoped<IElementsRepostiory<Element>, ElementsRepository>();
+            services.AddScoped<ICategoriesRepository<Category>, CategoriesRepository>();
 
             services.AddControllersWithViews();
             services.AddRazorPages();

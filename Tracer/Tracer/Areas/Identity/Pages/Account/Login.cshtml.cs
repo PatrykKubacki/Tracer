@@ -45,15 +45,17 @@ namespace Tracer.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Display(Name = "Email")]
+            [Required(ErrorMessage = "Email wymagany")]
             [EmailAddress]
             public string Email { get; set; }
 
-            [Required]
+            [Display(Name = "Hasło")]
+            [Required(ErrorMessage = "Hasło wymagane")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
-            [Display(Name = "Remember me?")]
+            [Display(Name = "Zapamiętaj mnie")]
             public bool RememberMe { get; set; }
         }
 
